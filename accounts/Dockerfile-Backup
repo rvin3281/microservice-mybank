@@ -1,0 +1,11 @@
+#Start with a base image containing Java Runtime
+FROM openjdk:17-jdk-slim
+
+#Provide details of who maintaining this Docker image
+MAINTAINER eazybytes.com
+
+# From the target folder the JAR file will be copied to Docker image
+COPY target/accounts-0.0.1-SNAPSHOT.jar accounts-0.0.1-SNAPSHOT.jar
+
+# Command to run Spring boot application
+ENTRYPOINT ["java","-jar","accounts-0.0.1-SNAPSHOT.jar"]

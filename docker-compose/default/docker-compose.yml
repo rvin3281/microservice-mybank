@@ -1,0 +1,48 @@
+services:
+  configserver:
+    image: "rvinrajan3281/configserver:v1"
+    container_name: configserver-ms
+    ports:
+      - "8099:8099"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - eazybank
+  accounts:
+    image: "rvinrajan3281/accounts:v1"
+    container_name: accounts-ms
+    ports:
+      - "8094:8094"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - eazybank
+  cards:
+    image: "rvinrajan3281/cards:latest"
+    container_name: cards-ms
+    ports:
+      - "8093:8093"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - eazybank
+  loans:
+    image: "rvinrajan3281/loans-service:v1"
+    container_name: loans-ms
+    ports:
+      - "8092:8092"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - eazybank
+networks:
+  eazybank:
+    driver: "bridge"
