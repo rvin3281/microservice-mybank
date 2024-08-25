@@ -1,0 +1,23 @@
+# GENERAL DETAILS
+#CONFIG SERVER DETAILS => To communicate with Spring Cloud Config
+# HEALTH CHECK DETAILS ==> NEED TO ADD THE READINESS AND LIVENESS
+spring:
+  application:
+    name: "eurekaserver"
+  config:
+      import: "optional:configserver:http://localhost:8099/"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    health:
+      readiness-state:
+        enabled: true
+      liveness-state:
+        enabled: true
+    endpoint:
+      health:
+        probes:
+          enabled: true
