@@ -59,9 +59,9 @@ public class ExternalController {
     @GetMapping("/fetchCustomerDetails")
     public ResponseEntity<ResponseWithDataDto<CustomerDetailsDto>> fetchCustomerDetails(@RequestParam
                                                                    @Pattern(regexp = "(^$|[0-9]{10})",message="Mobile number must be 10 digit")
-                                                                   String mobileNumner) throws NotFoundException, InternalException {
+                                                                   String mobileNumber) throws NotFoundException, InternalException {
 
-        CustomerDetailsDto customerDetailsDto = customService.fetchFeignCustomerDetails(mobileNumner);
+        CustomerDetailsDto customerDetailsDto = customService.fetchFeignCustomerDetails(mobileNumber);
 
         return ResponseEntity
                 .status(HttpStatus.OK)

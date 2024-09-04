@@ -1,10 +1,10 @@
-package com.eazybyte.loanservice;
+package com.eazybyte.gatewayserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-//@SpringBootTest
-class LoanServiceApplicationTests {
+@SpringBootTest
+class GatewayserverApplicationTests {
 
 	@Test
 	void contextLoads() {

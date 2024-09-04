@@ -41,12 +41,6 @@ services:
     container_name: accounts-ms
     ports:
       - "8094:8094"
-    healthcheck:
-      test: "curl --fail --silent localhost:8094/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
     environment:
       SPRING_APPLICATION_NAME: "accounts"
     extends:
@@ -58,12 +52,6 @@ services:
     container_name: cards-ms
     ports:
       - "8093:8093"
-    healthcheck:
-      test: "curl --fail --silent localhost:8093/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
     environment:
       SPRING_APPLICATION_NAME: "cards"
     extends:
@@ -75,32 +63,19 @@ services:
     container_name: loans-ms
     ports:
       - "8092:8092"
-    healthcheck:
-      test: "curl --fail --silent localhost:8092/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
     environment:
       SPRING_APPLICATION_NAME: "loans"
     extends:
       file: common-config.yml
       service: microservice-configserver-config
 
-  gatewayserver:
-    image: "rvinrajan3281/gatewayserver:v1"
-    container_name: gatewayserver-ms
+  loans1:
+    image: "rvinrajan3281/loans:v1"
+    container_name: loans-ms1
     ports:
-      - "9095:9095"
-    depends_on:
-      accounts:
-        condition: service_healthy
-      cards:
-        condition: service_healthy
-      loans:
-        condition: service_healthy
+      - "8098:8092"
     environment:
-      SPRING_APPLICATION_NAME: "gatewayserver"
+      SPRING_APPLICATION_NAME: "loans"
     extends:
       file: common-config.yml
       service: microservice-configserver-config

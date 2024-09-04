@@ -8,6 +8,7 @@ import com.eazybyte.loanservice.dto.response.APIErrorResponseDto;
 import com.eazybyte.loanservice.dto.response.APIResponseDTO;
 import com.eazybyte.loanservice.dto.response.APIResponseWithDataDTO;
 import com.eazybyte.loanservice.services.ILoansService;
+import com.eazybyte.loanservice.services.ServicesImpl.LoansServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -38,7 +39,7 @@ import java.time.LocalDateTime;
 public class LoansController {
 
     @Autowired
-    private ILoansService service;
+    private LoansServiceImpl service;
 
     @Value("${build.version}")
     private String buildVersion;
