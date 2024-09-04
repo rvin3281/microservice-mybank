@@ -16,6 +16,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -33,6 +35,8 @@ import java.time.LocalDateTime;
 @RequestMapping("/api/v1/cards")
 @Validated
 public class CardsController {
+
+    private static final Logger logger = LoggerFactory.getLogger(CardsController.class);
 
     @Autowired
     private CardsServiceImpl iCardsService;
@@ -89,9 +93,13 @@ public class CardsController {
             )
     })
     @GetMapping
-    public ResponseEntity<APIResponseWithDataDto<ReadCardsDto>> fetchCardDetails(@RequestParam
+    public ResponseEntity<APIResponseWithDataDto<ReadCardsDto>> fetchCardDetails( @RequestHeader("eazybank-correlation-id") String correlationId,
+                                                     @RequestParam
                                                      @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
                                                      String mobileNumber) {
+
+        logger.debug("eazybank-correlation-id found:{}", correlationId);
+
         ReadCardsDto readCardsDto = iCardsService.fetchCard(mobileNumber);
         return ResponseEntity
                 .status(HttpStatus.OK)

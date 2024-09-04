@@ -7,6 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 public interface CardsFeignClient {
 
     @GetMapping(value = "/api/v1/cards", consumes = "application/json")
-    public ResponseEntity<APIResponseWithDataDTO<ReadCardsDto>> fetchCardDetails(@RequestParam String mobileNumber);
+    public ResponseEntity<APIResponseWithDataDTO<ReadCardsDto>> fetchCardDetails(@RequestHeader("eazybank-correlation-id") String correlationId,
+                                                                                 @RequestParam String mobileNumber);
 
 }

@@ -11,6 +11,7 @@ public interface ICustomerService {
      * @param mobileNumber
      * @return
      */
-    CustomerDetailsDto fetchFeignCustomerDetails(String mobileNumber) throws NotFoundException, InternalException;
+    CustomerDetailsDto fetchFeignCustomerDetails(String mobileNumber, String correlationId)
+            throws NotFoundException, InternalException;
 
 }

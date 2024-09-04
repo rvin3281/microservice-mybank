@@ -40,7 +40,8 @@ public class CustomServiceImpl implements ICustomerService {
     private AccountMapper accountMapper;
 
     @Override
-    public CustomerDetailsDto fetchFeignCustomerDetails(String mobileNumber) throws NotFoundException, InternalException {
+    public CustomerDetailsDto fetchFeignCustomerDetails(String mobileNumber, String correlationId)
+            throws NotFoundException, InternalException {
 
         try{
 
@@ -75,12 +76,12 @@ public class CustomServiceImpl implements ICustomerService {
             customerDetailsDto.setReadCustomerAccountDto(readCustomerAccountDto);
 
             // FETCH LOAN DETAIL
-           ResponseEntity<APIResponseWithDataDTO<ReadLoanDto>> loadDtoResponseEntity = loansFeignClient.fetchLoanDetails(mobileNumber);
+           ResponseEntity<APIResponseWithDataDTO<ReadLoanDto>> loadDtoResponseEntity = loansFeignClient.fetchLoanDetails(correlationId, mobileNumber);
            // GET THE LOAN INFORMATION
             customerDetailsDto.setReadLoanDto(loadDtoResponseEntity.getBody().getData());
 
             // FETCH CArd DETAIL
-            ResponseEntity<APIResponseWithDataDTO<ReadCardsDto>> cardDtoResponseEntity = cardsFeignClient.fetchCardDetails(mobileNumber);
+            ResponseEntity<APIResponseWithDataDTO<ReadCardsDto>> cardDtoResponseEntity = cardsFeignClient.fetchCardDetails(correlationId, mobileNumber);
             // GET THE LOAN INFORMATION
             customerDetailsDto.setReadCardsDto(cardDtoResponseEntity.getBody().getData());
 

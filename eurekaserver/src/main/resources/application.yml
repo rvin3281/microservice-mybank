@@ -1,13 +1,10 @@
-# GENERAL DETAILS
-#CONFIG SERVER DETAILS => To communicate with Spring Cloud Config
-# HEALTH CHECK DETAILS ==> NEED TO ADD THE READINESS AND LIVENESS
 server:
   port: 9090
 spring:
   application:
     name: "eurekaserver"
   config:
-    url: "optional:configserver:http://localhost:9090/"
+    import: "optional:configserver:http://localhost:8099/"
 
 management:
   endpoints:
