@@ -240,9 +240,11 @@ public class LoansController {
     @GetMapping("/contact-info")
     public ResponseEntity<LoanContactInfo> getContactInfo()
     {
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(loanContactInfo);
+        logger.debug("Invoked loans contact-info API");
+        throw new RuntimeException("ERROR");
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body(loanContactInfo);
     }
 
 }

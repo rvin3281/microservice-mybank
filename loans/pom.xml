@@ -170,7 +170,7 @@
 				<version>3.3.2</version>
 				<configuration>
 					<to>
-						<image>rvinrajan3281/loans:v1</image>
+						<image>rvinrajan3281/loans:v2</image>
 					</to>
 				</configuration>
 			</plugin>

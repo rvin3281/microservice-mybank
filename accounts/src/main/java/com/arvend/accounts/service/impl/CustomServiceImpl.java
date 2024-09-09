@@ -77,13 +77,21 @@ public class CustomServiceImpl implements ICustomerService {
 
             // FETCH LOAN DETAIL
            ResponseEntity<APIResponseWithDataDTO<ReadLoanDto>> loadDtoResponseEntity = loansFeignClient.fetchLoanDetails(correlationId, mobileNumber);
-           // GET THE LOAN INFORMATION
-            customerDetailsDto.setReadLoanDto(loadDtoResponseEntity.getBody().getData());
+
+           // RESILIENT CHECK => IF ANY ERROR ON LOAN SERVICE THEN IT RETURN NULL
+            if(null != loadDtoResponseEntity){
+                // GET THE LOAN INFORMATION
+                customerDetailsDto.setReadLoanDto(loadDtoResponseEntity.getBody().getData());
+            }
 
             // FETCH CArd DETAIL
             ResponseEntity<APIResponseWithDataDTO<ReadCardsDto>> cardDtoResponseEntity = cardsFeignClient.fetchCardDetails(correlationId, mobileNumber);
-            // GET THE LOAN INFORMATION
-            customerDetailsDto.setReadCardsDto(cardDtoResponseEntity.getBody().getData());
+
+            // RESILIENT CHECK => IF ANY ERROR ON LOAN SERVICE THEN IT RETURN NULL
+            if(null != cardDtoResponseEntity){
+                // GET THE LOAN INFORMATION
+                customerDetailsDto.setReadCardsDto(cardDtoResponseEntity.getBody().getData());
+            }
 
             return customerDetailsDto;
 

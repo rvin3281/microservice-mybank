@@ -161,7 +161,7 @@
 				<version>3.3.2</version>
 				<configuration>
 					<to>
-						<image>rvinrajan3281/cards:v1</image>
+						<image>rvinrajan3281/cards:v2</image>
 					</to>
 				</configuration>
 			</plugin>
